@@ -11,7 +11,7 @@ $(function(){
         maxHeight:40,
         ellipsis:"****",
         callback:function(){
-            alert("height:"+$(this).height());
+            console.log("height:"+$(this).height());
         }
     });
 })

@@ -15,6 +15,7 @@
             lineHeight: 0,
             lineNum: 0,
             ellipsis:"...",
+            cutLength:1,
             callback:function(){
             }
         };
@@ -26,6 +27,18 @@
             dotString();
         }
         function dotString() {
+            var maxHeight=getMaxHeight();
+            while ($ele.height() > maxHeight) {
+                var originStr = $ele.text(), subStr = "",
+                    ellipsis=configs.ellipsis,ellipsisLength=configs.ellipsis.length;
+                if (originStr.substring(originStr.length - ellipsisLength, originStr.length) == ellipsis) {
+                    $ele.text(getOriginSubstring(ellipsisLength));
+                }
+                $ele.text(getOriginSubstring(configs.cutLength)+ellipsis);
+            }
+            configs.callback.call($ele);
+        }
+        function getMaxHeight(){
             var maxHeight = configs.maxHeight;
             if (maxHeight == 0 || typeof (maxHeight) != "number") {
                 var h = configs.lineHeight * configs.lineNum;
@@ -34,20 +47,12 @@
                     throw "It does not specify a maximum height";
                 }
             }
-            while ($ele.height() > maxHeight) {
-                var originStr = $ele.text(), subStr = "",
-                    ellipsis=configs.ellipsis,ellipsisLength=configs.ellipsis.length;
-                if (originStr.substring(originStr.length - ellipsisLength, originStr.length) == ellipsis) {
-                    $ele.text(getOriginSubstring());
-                }
-                $ele.text(getOriginSubstring()+ellipsis);
-            }
-            configs.callback.call($ele);
+            return maxHeight;
         }
-        function getOriginSubstring(){
+        function getOriginSubstring(cutLength){
             var text=$ele.text(),
                 ellipsisLength=configs.ellipsis.length;
-            return text.substring(0, text.length - ellipsisLength);
+            return text.substring(0, text.length - cutLength);
         }
         this.get=function(attr){
             if(attr="originText"){
