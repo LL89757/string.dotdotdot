@@ -14,7 +14,9 @@
             maxHeight: 0,
             lineHeight: 0,
             lineNum: 0,
-            ellipsis:"..."
+            ellipsis:"...",
+            callback:function(){
+            }
         };
         configs = $.extend(defConfigs, configs);
         if (this.length == 0) {
@@ -40,6 +42,7 @@
                 }
                 $ele.text(getOriginSubstring()+ellipsis);
             }
+            configs.callback.call($ele);
         }
         function getOriginSubstring(){
             var text=$ele.text(),
