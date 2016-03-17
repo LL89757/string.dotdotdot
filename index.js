@@ -14,4 +14,8 @@ $(function(){
             console.log("height:"+$(this).height());
         }
     });
+
+    $(".text2").dotString({
+        lineNum:1
+    })
 })

@@ -1,0 +1,11 @@
+.demo {
+    width: 50%;
+    margin: auto;
+    line-height: 20px;
+}
+
+.text,
+.text1{
+    display: block;
+    margin-top: 1em;
+}
